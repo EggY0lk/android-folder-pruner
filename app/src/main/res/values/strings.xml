@@ -1,3 +1,43 @@
 <resources>
     <string name="app_name">Folder Pruner</string>
+    <!-- Scan screen -->
+    <string name="choose_folder">Choose folder</string>
+    <string name="include_subfolders">Include subfolders</string>
+    <string name="scanning">Scanning\u2026</string>
+    <string name="files_scanned">Files scanned: %d</string>
+    <string name="current_folder">Folder: %s</string>
+    <string name="recoverable_bytes">Recoverable: %s</string>
+    <string name="scan_complete">Scan complete. Review the groups below.</string>
+
+    <!-- Review screen -->
+    <string name="review">Review duplicates</string>
+    <string name="back">Back</string>
+    <string name="filter_all">All</string>
+    <string name="filter_exact">Exact duplicates</string>
+    <string name="filter_older">Older versions</string>
+    <string name="no_groups">No duplicate groups found.</string>
+    <string name="group_files">%d files</string>
+    <string name="group_recoverable">Free up to %s</string>
+
+    <!-- File row -->
+    <string name="status_keep">Keep</string>
+    <string name="status_exact_duplicate">Exact duplicate</string>
+    <string name="status_older_version">Older version</string>
+    <string name="unknown_date">Unknown date</string>
+
+    <!-- Confirmation bar -->
+    <string name="confirmation_bar_label">%1$d selected, %2$s to free</string>
+    <string name="confirmation_bar_tap">Tap to confirm deletion</string>
+
+    <!-- Confirm dialog -->
+    <string name="confirm_delete_title">Delete selected files?</string>
+    <string name="confirm_delete_message">This will permanently delete %1$d file(s) and free %2$s. This cannot be undone.</string>
+    <string name="delete">Delete files</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Misc -->
+    <string name="size_bytes">%d B</string>
+    <string name="size_kb">%.1f KB</string>
+    <string name="size_mb">%.1f MB</string>
+    <string name="size_gb">%.1f GB</string>
 </resources>

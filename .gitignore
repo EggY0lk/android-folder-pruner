@@ -1,0 +1,45 @@
+*.apk
+*.aab
+
+# Built application files
+*.apk
+*.aab
+
+# Gradle
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (keep out of version control)
+google-services.json
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# OS-specific
+desktop.ini
+
+# Kotlin
+*.class
+
+# ProGuard
+proguard/
+proguard-rules.pro.obfuscation_mapping.txt
+
+# Signing
+signing/

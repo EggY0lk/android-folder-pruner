@@ -82,7 +82,7 @@ fun ReviewScreen(viewModel: ScanViewModel, onBack: () -> Unit) {
             } else if (visibleGroups.isEmpty()) {
                 Text(text = stringResource(R.string.no_groups))
             } else {
-                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                LazyColumn(modifier = Modifier.weight(1f)) {
                     items(visibleGroups.size) { index ->
                         val item = visibleGroups[index]
                         GroupCard(

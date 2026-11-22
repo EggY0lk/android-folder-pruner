@@ -59,6 +59,10 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
         _includeSubfolders.value = value
     }
 
+    fun setPickerError(message: String) {
+        _error.value = message
+    }
+
     fun toggleFile(uri: String) {
         val current = _selected.value
         _selected.value = if (current.contains(uri)) current - uri else current + uri

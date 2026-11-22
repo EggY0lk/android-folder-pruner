@@ -3,6 +3,7 @@ package com.example.folderpruner.ui
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -55,8 +56,14 @@ class MainActivity : ComponentActivity() {
                         ScanScreen(
                             viewModel = viewModel,
                             onChooseFolder = {
-                        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).addCategory(Intent.CATEGORY_OPENABLE)
-                        openDocumentTree.launch(intent)
+                        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+                        try {
+                            openDocumentTree.launch(intent)
+                        } catch (e: ActivityNotFoundException) {
+                            viewModel.setPickerError(
+                                "No file manager available to pick a folder. Install a file manager app and try again."
+                            )
+                        }
                     },
                         )
                     }

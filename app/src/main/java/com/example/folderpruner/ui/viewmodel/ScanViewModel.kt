@@ -55,6 +55,9 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), null)
 
+    private val _scanComplete = MutableStateFlow(false)
+    val scanComplete: StateFlow<Boolean> = _scanComplete.stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
+
     fun setIncludeSubfolders(value: Boolean) {
         _includeSubfolders.value = value
     }
@@ -72,6 +75,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             _error.value = null
             _groups.value = emptyList<DuplicateGroup>()
+            _scanComplete.value = false
             safUriRepository.takePersistableUriPermission(Uri.parse(treeUri), flags)
             scan(treeUri)
         }
@@ -81,6 +85,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
         val handler = CoroutineExceptionHandler { _, exception ->
             _error.value = exception.message ?: "Scan failed"
             _progress.value = _progress.value.copy(filesScanned = 0, currentFolder = null, totalRecoverableBytes = 0L)
+            _scanComplete.value = true
         }
         viewModelScope.launch(handler) {
             val entries = withContext(Dispatchers.IO) {
@@ -92,6 +97,7 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
             }
             _groups.value = result.groups
             _progress.value = _progress.value.copy(totalRecoverableBytes = result.totalRecoverableBytes)
+            _scanComplete.value = true
         }
     }
 

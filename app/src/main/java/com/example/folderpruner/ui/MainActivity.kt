@@ -14,6 +14,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,8 +34,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             FolderPrunerTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    var showReview by remember { mutableStateOf(false) }
                     var treeUri by remember { mutableStateOf<String?>(null) }
+                    val scanCompleteState = viewModel.scanComplete.collectAsState(initial = false)
+                    val scanComplete = scanCompleteState.value
 
                     val openDocumentTree = rememberLauncherForActivityResult(
                     ActivityResultContracts.StartActivityForResult()
@@ -44,13 +46,12 @@ class MainActivity : ComponentActivity() {
                         treeUri = selected.toString()
                         val flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                         viewModel.pickFolder(selected.toString(), flags)
-                        showReview = true
                     }
                 }
-                    if (showReview && treeUri != null) {
+                    if (scanComplete && treeUri != null) {
                         ReviewScreen(
                             viewModel = viewModel,
-                            onBack = { showReview = false; treeUri = null },
+                            onBack = { treeUri = null },
                         )
                     } else {
                         ScanScreen(

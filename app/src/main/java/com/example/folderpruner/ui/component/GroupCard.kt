@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -78,10 +76,10 @@ fun GroupCard(
             Spacer(Modifier.height(12.dp))
             Divider()
             Spacer(Modifier.height(8.dp))
-            LazyColumn(
+            Column(
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                items(group.rankedFiles.size) { index ->
+                for (index in group.rankedFiles.indices) {
                     val ranked = group.rankedFiles[index]
                     FileRow(
                         rankedFile = ranked,
